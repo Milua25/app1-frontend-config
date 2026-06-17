@@ -1,27 +1,27 @@
-# apiVersion: apps/v1
-# kind: Deployment
-# metadata:
-#   name: frontend
-#   namespace: app1-ns
-# spec:
-#   replicas: 1
-#   selector:
-#     matchLabels:
-#       app: frontend
-#   template:
-#     metadata:
-#       labels:
-#         app: frontend
-#     spec:
-#       containers:
-#         - name: frontend
-#           image: 247069422203.dkr.ecr.us-east-2.amazonaws.com/argocd-demo-frontend-ecr:v1.0.1
-#           ports:
-#             - containerPort: 4000
-#           env:
-#             - name: BACKEND_URL
-#               value: http://backend-svc:5000/api/message
-#           imagePullPolicy: Always
-#       # Tell Kubernetes to use the auto-renewing secret
-#       imagePullSecrets:
-#       - name: ecr-registry-secret
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: app1-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+        - name: frontend
+          image: 247069422203.dkr.ecr.us-east-2.amazonaws.com/argocd-demo-frontend-ecr:v1.0.1
+          ports:
+            - containerPort: 4000
+          env:
+            - name: BACKEND_URL
+              value: http://backend-svc:5000/api/message
+          imagePullPolicy: Always
+      # Tell Kubernetes to use the auto-renewing secret
+      imagePullSecrets:
+      - name: ecr-registry-secret
